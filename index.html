@@ -254,7 +254,7 @@
                 Level</button>
         </div>
 
-        <button id="btn-train" class="menu-btn active" onclick="navigate('training')">Training Mode</button>
+        <button id="btn-train" class="menu-btn" onclick="navigate('training')">Training Mode</button>
         <button id="btn-free" class="menu-btn" onclick="navigate('freefall')">Freefall Sandbox</button>
         <div style="border-top: 1px solid #262626; margin: 5px 0;"></div>
         <button id="btn-lib" class="menu-btn" onclick="navigate('library')">Command Library</button>
@@ -318,7 +318,9 @@
 
         let vfs = {};
         let currentPath = ["home", "guest"];
-        let currentMode = 'training';
+
+        // BUG FIX: Set currentMode to null so the first boot sequence triggers correctly
+        let currentMode = null;
 
         function resetVFS() {
             vfs = JSON.parse(JSON.stringify(masterVfsTemplate));
@@ -338,7 +340,7 @@
             return `guest@linux:${pathStr}$`;
         }
 
-        // MISSIONS (Redesigned as puzzles)
+        // MISSIONS
         let currentLevel = 0;
         const levels = [
             { m: "List the files and folders in your current directory. (Hint: Click 'Command Library' on the left to find the command).", c: cmd => cmd === 'ls', s: "System files identified." },
