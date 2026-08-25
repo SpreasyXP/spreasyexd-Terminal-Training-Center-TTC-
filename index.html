@@ -4,12 +4,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terminal OS: Minimalist Edition</title>
+    <title>Terminal Training Center</title>
     <style>
-        /* Clean, Human, Monochrome Design */
+        /* CSS VARIABLES - Hardcore Monochrome Design */
+        :root {
+            --bg-base: #0f0f0f;
+            --bg-panel: #141414;
+            --bg-term: #000000;
+            --border-main: #262626;
+            --text-main: #d4d4d4;
+            --text-muted: #888888;
+            --color-success: #4ade80;
+            --color-warning: #eab308;
+            --color-error: #f87171;
+            --color-folder: #38bdf8;
+            --color-white: #ffffff;
+        }
+
+        /* GLOBAL STYLES */
         body {
-            background-color: #0f0f0f;
-            color: #d4d4d4;
+            background-color: var(--bg-base);
+            color: var(--text-main);
             font-family: system-ui, -apple-system, sans-serif;
             margin: 0;
             height: 100vh;
@@ -27,11 +42,11 @@
             }
         }
 
-        /* Sidebar Styling */
+        /* SIDEBAR */
         #sidebar {
             width: 260px;
-            background: #141414;
-            border-right: 1px solid #262626;
+            background: var(--bg-panel);
+            border-right: 1px solid var(--border-main);
             padding: 30px 20px;
             display: flex;
             flex-direction: column;
@@ -41,59 +56,60 @@
         .brand {
             font-size: 1.2rem;
             font-weight: 600;
-            color: #ffffff;
+            color: var(--color-white);
             margin-bottom: 10px;
             letter-spacing: 0.5px;
         }
 
         .level-tracker {
             background: #1e1e1e;
-            color: #ffffff;
+            color: var(--color-white);
             padding: 12px;
             border-radius: 6px;
             font-size: 0.85rem;
             font-weight: 600;
             text-align: center;
-            border: 1px solid #333333;
+            border: 1px solid #333;
             margin-bottom: 5px;
         }
 
-        .action-btn {
+        /* BUTTONS */
+        .btn {
             background: transparent;
-            color: #a3a3a3;
-            border: 1px solid #333333;
-            padding: 8px;
             border-radius: 6px;
-            font-size: 0.85rem;
             cursor: pointer;
-            margin-bottom: 15px;
             transition: 0.2s;
         }
 
+        .action-btn {
+            color: #a3a3a3;
+            border: 1px solid #333;
+            padding: 8px;
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+            width: 100%;
+        }
+
         .action-btn:hover {
-            background: #262626;
-            color: #ffffff;
+            background: var(--border-main);
+            color: var(--color-white);
         }
 
         .menu-btn {
-            background: transparent;
-            color: #888888;
+            color: var(--text-muted);
             border: none;
             text-align: left;
             padding: 10px 15px;
             font-size: 0.95rem;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.2s ease;
         }
 
         .menu-btn:hover,
         .menu-btn.active {
-            background: #262626;
-            color: #ffffff;
+            background: var(--border-main);
+            color: var(--color-white);
         }
 
-        /* Main Area */
+        /* MAIN LAYOUT */
         #main-content {
             flex: 1;
             padding: 40px;
@@ -111,14 +127,14 @@
             flex-direction: column;
         }
 
-        /* Terminal Window */
+        /* TERMINAL WINDOW */
         #terminal-window {
             flex: 1;
-            background-color: #000000;
-            border: 1px solid #333333;
+            background-color: var(--bg-term);
+            border: 1px solid #333;
             border-radius: 8px;
             padding: 25px;
-            font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+            font-family: 'Menlo', 'Monaco', monospace;
             font-size: 0.95rem;
             display: flex;
             flex-direction: column;
@@ -126,39 +142,9 @@
         }
 
         .output-log {
-            color: #cccccc;
+            color: #ccc;
             margin-bottom: 15px;
             line-height: 1.6;
-        }
-
-        .system-text {
-            color: #777777;
-            font-style: italic;
-        }
-
-        .mission-text {
-            color: #ffffff;
-            font-weight: bold;
-            margin-top: 15px;
-            margin-bottom: 10px;
-            border-left: 3px solid #ffffff;
-            padding-left: 12px;
-        }
-
-        .success-text {
-            color: #ffffff;
-            font-style: italic;
-            margin-bottom: 10px;
-        }
-
-        .error-text {
-            color: #a3a3a3;
-        }
-
-        .prompt {
-            color: #ffffff;
-            font-weight: bold;
-            margin-right: 10px;
         }
 
         .input-line {
@@ -169,13 +155,44 @@
         .terminal-input {
             background: transparent;
             border: none;
-            color: #ffffff;
+            color: var(--color-white);
             font-family: inherit;
             font-size: 0.95rem;
             outline: none;
             flex-grow: 1;
         }
 
+        .prompt {
+            color: var(--color-white);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        /* TEXT UTILITIES */
+        .sys-text {
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        .mission-text {
+            color: var(--color-white);
+            font-weight: bold;
+            margin: 15px 0 10px;
+            border-left: 3px solid var(--color-warning);
+            padding-left: 12px;
+        }
+
+        .success-text {
+            color: var(--color-success);
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+
+        .err-text {
+            color: var(--color-error);
+        }
+
+        /* LS GRID FORMATTING */
         .ls-grid {
             display: flex;
             flex-wrap: wrap;
@@ -185,16 +202,19 @@
 
         .ls-folder {
             font-weight: bold;
-            color: #ffffff;
-            text-decoration: underline;
-            text-decoration-color: #555;
+            color: var(--color-folder);
         }
 
         .ls-file {
-            color: #aaaaaa;
+            color: var(--text-main);
         }
 
-        /* Command Library */
+        .ls-hidden {
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        /* LIBRARY CARDS */
         #library-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -204,14 +224,14 @@
         }
 
         .cmd-card {
-            background: #111111;
-            border: 1px solid #262626;
+            background: #111;
+            border: 1px solid var(--border-main);
             padding: 20px;
             border-radius: 8px;
         }
 
         .cmd-title {
-            color: #ffffff;
+            color: var(--color-white);
             font-family: monospace;
             font-size: 1.1rem;
             font-weight: bold;
@@ -219,11 +239,12 @@
         }
 
         .cmd-desc {
-            color: #888888;
+            color: var(--text-muted);
             font-size: 0.9rem;
             line-height: 1.5;
         }
 
+        /* SCROLLBAR */
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -246,368 +267,534 @@
 <body>
 
     <div id="sidebar">
-        <div class="brand">spreasyexd.</div>
-
+        <div class="brand">Terminal Training Center</div>
         <div id="training-ui">
-            <div class="level-tracker" id="ui-level">Level 1 / 20</div>
-            <button class="action-btn" id="btn-reset" onclick="resetCurrentLevel()" style="width: 100%;">↻ Restart
-                Level</button>
+            <div class="level-tracker" id="ui-level">Level 1 / 30</div>
+            <button class="btn action-btn" onclick="resetCurrentLevel()">[Restart Level]</button>
         </div>
-
-        <button id="btn-train" class="menu-btn" onclick="navigate('training')">Training Mode</button>
-        <button id="btn-free" class="menu-btn" onclick="navigate('freefall')">Freefall Sandbox</button>
-        <div style="border-top: 1px solid #262626; margin: 5px 0;"></div>
-        <button id="btn-lib" class="menu-btn" onclick="navigate('library')">Command Library</button>
+        <button id="btn-train" class="btn menu-btn active" onclick="navigate('training')">Creator Training</button>
+        <button id="btn-free" class="btn menu-btn" onclick="navigate('freefall')">Freefall Sandbox</button>
+        <button id="btn-daily" class="btn menu-btn" onclick="navigate('daily')">Daily Quiz</button>
+        <div style="border-top: 1px solid var(--border-main); margin: 5px 0;"></div>
+        <button id="btn-lib" class="btn menu-btn" onclick="navigate('library')">Command Library</button>
     </div>
 
     <div id="main-content">
-        <!-- Terminal View -->
         <div id="terminal-page" class="page active">
-            <h2 id="terminal-title" style="margin-top:0; color: #fff; font-weight: 500;">Terminal Training</h2>
-            <div id="terminal-window" onclick="document.getElementById('cmd-input').focus()">
-                <div id="output" class="output-log"></div>
+            <h2 id="terminal-title" style="margin-top:0; color: #fff; font-weight: 500;">Creator Operations</h2>
+            <div id="terminal-window" onclick="DOM.input.focus()">
+                <!-- SEPARATED SCREENS TO PREVENT BUGGY BLEED-OVER -->
+                <div id="out-training" class="output-log" style="display: block;"></div>
+                <div id="out-freefall" class="output-log" style="display: none;"></div>
+                <div id="out-daily" class="output-log" style="display: none;"></div>
+
                 <div class="input-line">
-                    <span class="prompt" id="cmd-prompt">guest@linux:~$</span>
+                    <span class="prompt" id="cmd-prompt">creator@studio:~$</span>
                     <input type="text" id="cmd-input" class="terminal-input" autocomplete="off" autofocus>
                 </div>
             </div>
         </div>
-
-        <!-- Library View -->
         <div id="library-page" class="page">
             <h2 style="margin-top:0; color: #fff; font-weight: 500;">Command Reference</h2>
-            <p style="color: #888; margin-top:-10px; margin-bottom: 25px;">Standard operating procedures.</p>
+            <p style="color: var(--text-muted); margin-top:-10px; margin-bottom: 25px;">The tools required to run the
+                channel.</p>
             <div id="library-grid"></div>
         </div>
     </div>
 
     <script>
-        // COMMAND DATABASE
-        const commandData = [
-            { cmd: "ls", desc: "Lists files and folders in your current location." },
-            { cmd: "cd", desc: "Changes directory (e.g. 'cd folder_name' to enter, 'cd ..' to go back)." },
-            { cmd: "pwd", desc: "Displays the full path of your current directory." },
+        // --- 1. DOM CACHING ---
+        const DOM = {
+            outTraining: document.getElementById('out-training'),
+            outFreefall: document.getElementById('out-freefall'),
+            outDaily: document.getElementById('out-daily'),
+            input: document.getElementById('cmd-input'),
+            prompt: document.getElementById('cmd-prompt'),
+            terminal: document.getElementById('terminal-window'),
+            uiLevel: document.getElementById('ui-level'),
+            title: document.getElementById('terminal-title'),
+            trainUI: document.getElementById('training-ui'),
+            pages: document.querySelectorAll('.page'),
+            btns: document.querySelectorAll('.menu-btn')
+        };
+        let currentOut = DOM.outTraining;
+
+        // --- 2. COMMAND DATABASE ---
+        const commands = [
+            { cmd: "ls", desc: "Lists files. Use 'ls -a' to reveal hidden files." },
+            { cmd: "cd", desc: "Changes directory (e.g. 'cd folder_name' or 'cd ..')." },
+            { cmd: "pwd", desc: "Prints the full path of your current working directory." },
+            { cmd: "cat", desc: "Displays a file's contents." },
+            { cmd: "grep", desc: "Searches inside a file. (Format: grep [word] [filename])" },
+            { cmd: "wc -l", desc: "Counts lines inside a file. (Format: wc -l [filename])" },
             { cmd: "mkdir", desc: "Creates a new folder." },
             { cmd: "touch", desc: "Creates a blank new file." },
-            { cmd: "rmdir", desc: "Deletes an empty folder." },
-            { cmd: "mv", desc: "Renames/moves a file (e.g. mv old.txt new.txt)." },
-            { cmd: "cp", desc: "Copies a file." },
-            { cmd: "rm", desc: "Deletes a file (Use 'rm -r' for folders)." },
-            { cmd: "cat", desc: "Displays a file's contents." },
-            { cmd: "clear", desc: "Wipes terminal screen clean." },
-            { cmd: "whoami", desc: "Displays your current username." },
+            { cmd: "echo", desc: "Prints text. (e.g. echo hello > file.txt)" },
+            { cmd: "rm", desc: "Deletes a file. Use 'rm -r' for folders." },
+            { cmd: "ps", desc: "Displays running system processes." },
+            { cmd: "kill", desc: "Forcefully stops a running process. (Format: kill [PID])" },
+            { cmd: "curl", desc: "Fetches data from a web URL." },
             { cmd: "ping", desc: "Tests network connection to a server." },
-            { cmd: "history", desc: "Shows previously typed commands." }
+            { cmd: "history", desc: "Shows previously typed commands." },
+            { cmd: "date", desc: "Displays the current system date and time." },
+            { cmd: "uname -a", desc: "Displays system hardware and OS information." },
+            { cmd: "df -h", desc: "Displays available disk space on your hard drive." },
+            { cmd: "free -m", desc: "Displays available and used RAM (memory)." },
+            { cmd: "apt / pacman", desc: "Package managers for installing apps." },
+            { cmd: "clear", desc: "Wipes terminal screen clean." }
         ];
 
-        const grid = document.getElementById('library-grid');
-        commandData.forEach(item => {
-            grid.innerHTML += `<div class="cmd-card"><div class="cmd-title">${item.cmd}</div><div class="cmd-desc">${item.desc}</div></div>`;
-        });
-
-        // FILE SYSTEM
-        const masterVfsTemplate = {
+        // --- 3. VFS & STATE PERSISTENCE ---
+        const masterVfs = {
             "home": {
-                "guest": {
-                    "projects": { "attendance_tracker": {} },
-                    "sahur.txt": "Tung tung! Wake up bro, time to eat!",
-                    "video_ideas.txt": "1. Terminal keyboard shortcuts\n2. Focus on casual audience."
+                "creator": {
+                    "video_projects": {
+                        "terminal_shortcuts": { "script.txt": "Focus on casual viewers.\nKeep it simple.\nShow keyboard shortcuts." },
+                        "roblox_devlog": { "main.lua": "print('Hello Roblox')" }
+                    },
+                    "maker_projects": {
+                        "arduino_hsu.conf": "COMMUNICATION: HSU active\nI2C: disabled",
+                        "parts.txt": "15mm_stopcock: 0\n27mm_stopcock: 14\nwire_spools: 12"
+                    },
+                    ".youtube_auth": "ACCESS_TOKEN: sub_to_my_channel_99",
+                    "server_logs.txt": "INFO: Booting system...\nWARNING: HSU module desynced.\nERROR: Missing 27mm component.\nINFO: Retrying connection...\nSECRET_FLAG: overthewire_level_cleared\nINFO: Shutting down."
                 }
             }
         };
 
-        let vfs = {};
-        let currentPath = ["home", "guest"];
-
-        // BUG FIX: Set currentMode to null so the first boot sequence triggers correctly
-        let currentMode = null;
-
-        function resetVFS() {
-            vfs = JSON.parse(JSON.stringify(masterVfsTemplate));
-            currentPath = ["home", "guest"];
-        }
-
-        function getVfsDir() {
-            let current = vfs;
-            for (let folder of currentPath) { current = current[folder]; }
-            return current;
-        }
-
-        function getPromptString() {
-            if (currentPath.length === 0) return `guest@linux:/$`;
-            let pathStr = "/" + currentPath.join("/");
-            if (pathStr === "/home/guest") pathStr = "~";
-            return `guest@linux:${pathStr}$`;
-        }
-
-        // MISSIONS
-        let currentLevel = 0;
-        const levels = [
-            { m: "List the files and folders in your current directory. (Hint: Click 'Command Library' on the left to find the command).", c: cmd => cmd === 'ls', s: "System files identified." },
-            { m: "Read the contents of the 'sahur.txt' file.", c: cmd => cmd === 'cat sahur.txt', s: "Contents read successfully." },
-            { m: "Change your directory to enter the 'projects' folder.", c: cmd => cmd === 'cd projects', s: "Directory changed." },
-            { m: "Display the full path of your current working directory to verify your location.", c: cmd => cmd === 'pwd', s: "Path verified: /home/guest/projects." },
-            { m: "List the contents of this folder to see what is inside.", c: cmd => cmd === 'ls', s: "Tracker folder found." },
-            { m: "Enter the 'attendance_tracker' folder.", c: cmd => cmd === 'cd attendance_tracker', s: "Directory changed." },
-            { m: "Create a blank new file named 'db.sqlite'.", c: cmd => cmd === 'touch db.sqlite', s: "Database generated." },
-            { m: "List the files again to verify the database was created.", c: cmd => cmd === 'ls', s: "Database is present." },
-            { m: "Delete the 'db.sqlite' file.", c: cmd => cmd === 'rm db.sqlite', s: "File removed." },
-            { m: "Go back up one folder to return to the projects directory.", c: cmd => cmd === 'cd ..', s: "Returned to projects." },
-            { m: "Go back up one more folder to return to your home directory.", c: cmd => cmd === 'cd ..', s: "Returned to home." },
-            { m: "Create a new folder named 'roblox_dev'.", c: cmd => cmd === 'mkdir roblox_dev', s: "Directory created." },
-            { m: "Enter your newly created 'roblox_dev' folder.", c: cmd => cmd === 'cd roblox_dev', s: "Directory changed." },
-            { m: "Create a blank new file named 'main.lua'.", c: cmd => cmd === 'touch main.lua', s: "Script generated." },
-            { m: "Run the command that shows your current username.", c: cmd => cmd === 'whoami', s: "User is guest." },
-            { m: "Test your network connection by pinging 'google.com'.", c: cmd => cmd === 'ping google.com', s: "Network stable." },
-            { m: "Display a list of all the commands you have previously typed.", c: cmd => cmd === 'history', s: "History retrieved." },
-            { m: "Return to your home directory by going back up one folder.", c: cmd => cmd === 'cd ..', s: "Returned to home." },
-            { m: "Attempt to delete the 'roblox_dev' directory using the command specifically for removing empty directories.", c: cmd => cmd === 'rmdir roblox_dev', s: "Blocked: Directory not empty. Lesson learned." },
-            { m: "Wipe the terminal screen clean to finish your training.", c: cmd => cmd === 'clear', s: "Screen cleared." }
+        const defaultProcesses = [
+            { pid: 101, cmd: "/sbin/init" },
+            { pid: 404, cmd: "ffmpeg (STALLED_RENDER_PROCESS)" },
+            { pid: 512, cmd: "bash" }
         ];
 
-        const outputDiv = document.getElementById('output');
-        const promptUI = document.getElementById('cmd-prompt');
+        const states = {
+            training: { vfs: null, path: null, level: 0, procs: [], started: false },
+            freefall: { vfs: null, path: null, procs: [], started: false },
+            daily: { vfs: null, path: null, procs: [], started: false }
+        };
+
+        Object.keys(states).forEach(key => {
+            states[key].vfs = JSON.parse(JSON.stringify(masterVfs));
+            states[key].path = ["home", "creator"];
+            states[key].procs = JSON.parse(JSON.stringify(defaultProcesses));
+        });
+
+        let currentMode = 'training';
+        let vfs = states.training.vfs;
+        let currentPath = states.training.path;
+        let currentLevel = states.training.level;
+        let runningProcesses = states.training.procs;
         let cmdHistory = [];
-        let historyIndex = -1;
+        let historyIdx = -1;
 
-        // NAVIGATION LOGIC
+        // --- 4. THE 30-LEVEL RANDOMIZED CURRICULUM ---
+        let creatorLevels = [
+            { m: "List all files in your home directory, including hidden ones. (Check the Command Library if unsure).", c: cmd => cmd === 'ls -a', s: "Hidden file '.youtube_auth' discovered." },
+            { m: "Display the contents of the hidden '.youtube_auth' file.", c: cmd => cmd === 'cat .youtube_auth', s: "Auth key acquired." },
+            { m: "Search for the word 'SECRET_FLAG' inside 'server_logs.txt'.", c: cmd => cmd.startsWith('grep') && cmd.includes('secret_flag') && cmd.includes('server_logs.txt'), s: "Flag extracted." },
+            { m: "Count the number of lines inside 'server_logs.txt'.", c: cmd => cmd.startsWith('wc -l') && cmd.includes('server_logs.txt'), s: "Line count calculated." },
+            { m: "Display all currently running system processes.", c: cmd => cmd === 'ps', s: "Process list retrieved." },
+            { m: "Find the PID for the stalled ffmpeg render and forcefully terminate that process.", c: cmd => cmd === 'kill 404', s: "Stalled render terminated." },
+            { m: "Fetch data from the web URL 'youtube.local/api'.", c: cmd => cmd === 'curl youtube.local/api', s: "API response received." },
+            { m: "Fetch data from 'youtube.local/api' and redirect the output into 'stats.txt'.", c: cmd => cmd.includes('curl youtube.local/api') && cmd.includes('> stats.txt'), s: "Stats saved locally." },
+            { m: "Refresh your system package repositories using apt.", c: cmd => cmd.replace('sudo ', '') === 'apt update', s: "Repositories synced." },
+            { m: "Install the 'obs-studio' package using apt.", c: cmd => cmd.replace('sudo ', '') === 'apt install obs-studio', s: "OBS successfully installed." },
+            { m: "Display the current system date and time.", c: cmd => cmd === 'date', s: "Timestamp verified." },
+            { m: "Display system hardware and OS information.", c: cmd => cmd === 'uname -a', s: "System parameters confirmed." },
+            { m: "Check the available disk space on your hard drive.", c: cmd => cmd === 'df -h', s: "Disk space is adequate." },
+            { m: "Check the available RAM on the system.", c: cmd => cmd === 'free -m', s: "Memory checks passed." },
+            { m: "Print the word 'hello' to the screen.", c: cmd => cmd === 'echo hello', s: "Echo returned correctly." },
+            { m: "Create a new folder named 'new_video'.", c: cmd => cmd === 'mkdir new_video', s: "Folder created." },
+            { m: "Print your current working directory path.", c: cmd => cmd === 'pwd', s: "Location verified." },
+            { m: "Create a blank file named 'script_v2.txt'.", c: cmd => cmd === 'touch script_v2.txt', s: "File created." },
+            { m: "Print the word 'ready' and redirect it into 'script_v2.txt'.", c: cmd => cmd === 'echo ready > script_v2.txt', s: "Content written." },
+            { m: "Display the contents of 'server_logs.txt'.", c: cmd => cmd === 'cat server_logs.txt', s: "Logs displayed." },
+            { m: "Test the network connection to 'youtube.com'.", c: cmd => cmd === 'ping youtube.com', s: "Network is online." },
+            { m: "Synchronize Arch package databases using pacman (-Sy).", c: cmd => cmd.replace('sudo ', '') === 'pacman -sy', s: "Arch databases synced." },
+            { m: "Install 'blender' using pacman (-S).", c: cmd => cmd.replace('sudo ', '') === 'pacman -s blender', s: "Software installed." },
+            { m: "Create a new folder named 'b_roll'.", c: cmd => cmd === 'mkdir b_roll', s: "Folder created." },
+            { m: "Create a blank file named 'ideas.txt'.", c: cmd => cmd === 'touch ideas.txt', s: "File created." },
+            { m: "Print the word 'subscribe' to the screen.", c: cmd => cmd === 'echo subscribe', s: "Message printed." },
+            { m: "Display your command history.", c: cmd => cmd === 'history', s: "History displayed." },
+            { m: "Install 'kdenlive' using apt.", c: cmd => cmd.replace('sudo ', '') === 'apt install kdenlive', s: "Video editor installed." },
+            { m: "Fetch data from the web URL 'shop.local/parts'.", c: cmd => cmd === 'curl shop.local/parts', s: "Data fetched." },
+            { m: "Clear the terminal screen.", c: cmd => cmd === 'clear', s: "Screen cleared." }
+        ];
+
+        // Shuffle the array instantly on load so it's a random game every time
+        for (let i = creatorLevels.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [creatorLevels[i], creatorLevels[j]] = [creatorLevels[j], creatorLevels[i]];
+        }
+
+        // --- 5. DAILY QUIZ SYSTEM ---
+        const dailyTasks = [
+            { m: "DAILY QUIZ: Create a folder called 'b_roll'. (Check the Command Library if stuck).", c: cmd => cmd === 'mkdir b_roll', s: "Folder created." },
+            { m: "DAILY QUIZ: Install the 'blender' package using apt.", c: cmd => cmd.replace('sudo ', '') === 'apt install blender', s: "Software installed." },
+            { m: "DAILY QUIZ: Display all running system processes.", c: cmd => cmd === 'ps', s: "Processes checked." },
+            { m: "DAILY QUIZ: Test the network connection to 'youtube.com'.", c: cmd => cmd === 'ping youtube.com', s: "Network is online." },
+            { m: "DAILY QUIZ: Check the current system date and time.", c: cmd => cmd === 'date', s: "Date verified." },
+            { m: "DAILY QUIZ: Check available disk space.", c: cmd => cmd === 'df -h', s: "Drive space verified." },
+            { m: "DAILY QUIZ: Check available RAM.", c: cmd => cmd === 'free -m', s: "RAM verified." },
+            { m: "DAILY QUIZ: Print your current working directory.", c: cmd => cmd === 'pwd', s: "Directory verified." },
+            { m: "DAILY QUIZ: Clear the terminal screen.", c: cmd => cmd === 'clear', s: "Screen cleared." },
+            { m: "DAILY QUIZ: Install 'kdenlive' using pacman.", c: cmd => cmd.replace('sudo ', '') === 'pacman -s kdenlive', s: "Video editor installed." },
+            { m: "DAILY QUIZ: Create a blank file named 'ideas.txt'.", c: cmd => cmd === 'touch ideas.txt', s: "File created." },
+            { m: "DAILY QUIZ: Fetch data from 'shop.local/parts'.", c: cmd => cmd === 'curl shop.local/parts', s: "Data fetched." }
+        ];
+
+        // --- UTILITY FUNCTIONS ---
+        const sleep = ms => new Promise(r => setTimeout(r, ms));
+        const printLog = (html) => currentOut.innerHTML += html;
+        const getVfsDir = () => currentPath.reduce((dir, folder) => dir[folder], vfs);
+        const updatePrompt = () => {
+            const pathStr = currentPath.length === 0 ? '/' : '/' + currentPath.join("/");
+            DOM.prompt.innerText = `creator@studio:${pathStr === "/home/creator" ? "~" : pathStr}$`;
+        };
+        const stripHtml = (html) => {
+            let doc = new DOMParser().parseFromString(html, 'text/html');
+            return doc.body.textContent || "";
+        };
+
+        document.getElementById('library-grid').innerHTML = commands.map(i =>
+            `<div class="cmd-card"><div class="cmd-title">${i.cmd}</div><div class="cmd-desc">${i.desc}</div></div>`
+        ).join('');
+
+        // --- 6. NAVIGATION & BUG FIXES ---
         function navigate(target) {
-            document.querySelectorAll('.menu-btn').forEach(btn => btn.classList.remove('active'));
-            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            DOM.btns.forEach(btn => btn.classList.remove('active'));
+            DOM.pages.forEach(page => page.classList.remove('active'));
+            document.getElementById(`btn-${target === 'training' ? 'train' : target === 'freefall' ? 'free' : target === 'daily' ? 'daily' : 'lib'}`).classList.add('active');
+            document.getElementById(`${target === 'library' ? 'library' : 'terminal'}-page`).classList.add('active');
 
-            if (target === 'library') {
-                document.getElementById('btn-lib').classList.add('active');
-                document.getElementById('library-page').classList.add('active');
+            if (target === 'library') return;
+
+            DOM.input.disabled = false;
+            DOM.input.value = '';
+
+            // SAVE CURRENT STATE
+            states[currentMode].vfs = vfs;
+            states[currentMode].path = currentPath;
+            states[currentMode].level = currentLevel;
+            states[currentMode].procs = runningProcesses;
+
+            // SWITCH SCREEN DIVS
+            DOM.outTraining.style.display = 'none';
+            DOM.outFreefall.style.display = 'none';
+            DOM.outDaily.style.display = 'none';
+
+            if (target === 'training') { currentOut = DOM.outTraining; currentOut.style.display = 'block'; }
+            else if (target === 'freefall') { currentOut = DOM.outFreefall; currentOut.style.display = 'block'; }
+            else if (target === 'daily') { currentOut = DOM.outDaily; currentOut.style.display = 'block'; }
+
+            // LOAD NEW STATE
+            currentMode = target;
+            vfs = states[currentMode].vfs;
+            currentPath = states[currentMode].path;
+            currentLevel = states[currentMode].level;
+            runningProcesses = states[currentMode].procs;
+
+            // UI UPDATES
+            if (target === 'training') {
+                DOM.title.innerText = "Creator Operations";
+                DOM.trainUI.style.display = 'block';
+            } else if (target === 'daily') {
+                DOM.title.innerText = "Daily Terminal Quiz";
+                DOM.trainUI.style.display = 'block';
             } else {
-                document.getElementById('terminal-page').classList.add('active');
-
-                if (currentMode !== target) {
-                    currentMode = target;
-                    resetVFS();
-                    outputDiv.innerHTML = '';
-                    cmdHistory = [];
-                    currentLevel = 0;
-                    bootSequence();
-                }
-
-                if (target === 'training') {
-                    document.getElementById('btn-train').classList.add('active');
-                    document.getElementById('terminal-title').innerText = "Terminal Training";
-                    document.getElementById('training-ui').style.display = 'block';
-                } else {
-                    document.getElementById('btn-free').classList.add('active');
-                    document.getElementById('terminal-title').innerText = "Sandbox Server";
-                    document.getElementById('training-ui').style.display = 'none';
-                }
-                document.getElementById('cmd-input').focus();
+                DOM.title.innerText = "Sandbox Server";
+                DOM.trainUI.style.display = 'none';
             }
+
+            if (!states[currentMode].started) {
+                states[currentMode].started = true;
+                currentOut.innerHTML = '';
+                bootSequence(currentMode);
+            } else {
+                updatePrompt();
+            }
+            DOM.input.focus();
+            setTimeout(() => DOM.terminal.scrollTop = DOM.terminal.scrollHeight, 10);
         }
 
-        // RESET CURRENT LEVEL LOGIC
         function resetCurrentLevel() {
-            vfs = JSON.parse(JSON.stringify(masterVfsTemplate));
-            currentPath = ["home", "guest"];
+            states[currentMode].vfs = JSON.parse(JSON.stringify(masterVfs));
+            states[currentMode].path = ["home", "creator"];
+            states[currentMode].procs = JSON.parse(JSON.stringify(defaultProcesses));
 
-            if (currentLevel >= 3) currentPath = ["home", "guest", "projects"];
-            if (currentLevel >= 6) currentPath = ["home", "guest", "projects", "attendance_tracker"];
-            if (currentLevel >= 7 && currentLevel < 9) vfs.home.guest.projects.attendance_tracker["db.sqlite"] = "";
-            if (currentLevel >= 10) currentPath = ["home", "guest", "projects"];
-            if (currentLevel >= 11) currentPath = ["home", "guest"];
-            if (currentLevel >= 12) vfs.home.guest["roblox_dev"] = {};
-            if (currentLevel >= 13) currentPath = ["home", "guest", "roblox_dev"];
-            if (currentLevel >= 14 && currentLevel < 19) vfs.home.guest["roblox_dev"]["main.lua"] = "";
-            if (currentLevel >= 18) currentPath = ["home", "guest"];
+            vfs = states[currentMode].vfs;
+            currentPath = states[currentMode].path;
+            runningProcesses = states[currentMode].procs;
 
-            outputDiv.innerHTML = `<div class="system-text">-- Local state rebuilt for Level ${currentLevel + 1} --</div>`;
-            printMission();
-            promptUI.innerText = getPromptString();
-            document.getElementById('cmd-input').focus();
+            currentOut.innerHTML = `<div class="sys-text">-- Local state rebuilt --</div>`;
+            printMission(currentMode);
+            updatePrompt();
+            DOM.input.focus();
         }
 
-        function printMission() {
-            if (currentMode !== 'training') return;
-            if (currentLevel < levels.length) {
-                document.getElementById('ui-level').innerText = `Level ${currentLevel + 1} / 20`;
-                outputDiv.innerHTML += `<div class="mission-text">MISSION: ${levels[currentLevel].m}</div>`;
-            } else {
-                document.getElementById('ui-level').innerText = `TRAINING COMPLETE`;
-                outputDiv.innerHTML += `<div class="mission-text">SYSTEM SECURED. Switch to Freefall Mode to practice freely.</div>`;
-            }
-        }
+        function printMission(mode) {
+            if (mode === 'freefall') return;
 
-        async function bootSequence() {
-            promptUI.innerText = getPromptString();
-            const bootText = currentMode === 'training'
-                ? ["Initializing core modules...", "Loading curriculum...", "Ready."]
-                : ["Sandbox environment active.", "No restrictions.", "Ready."];
-
-            for (let i = 0; i < bootText.length; i++) {
-                outputDiv.innerHTML += `<div class="system-text" id="line-${i}"></div>`;
-                let line = document.getElementById(`line-${i}`);
-                for (let char of bootText[i]) {
-                    line.innerHTML += char;
-                    await new Promise(r => setTimeout(r, 2));
+            if (mode === 'daily') {
+                const today = new Date().toDateString();
+                if (localStorage.getItem('daily_done') === today) {
+                    DOM.uiLevel.innerText = `[COMPLETED]`;
+                    DOM.outDaily.innerHTML += `<div class="mission-text" style="color:var(--color-success)">You already completed today's quiz! Come back tomorrow. [COMPLETED]</div>`;
+                    DOM.input.disabled = true;
+                } else {
+                    const taskIndex = Math.floor((new Date() - new Date(new Date().getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24) % dailyTasks.length;
+                    DOM.uiLevel.innerText = `Daily Quiz`;
+                    DOM.outDaily.innerHTML += `<div class="mission-text">${dailyTasks[taskIndex].m}</div>`;
                 }
-                await new Promise(r => setTimeout(r, 80));
+                return;
             }
-            if (currentMode === 'training') printMission();
+
+            if (currentLevel < creatorLevels.length) {
+                DOM.uiLevel.innerText = `Level ${currentLevel + 1} / 30`;
+                DOM.outTraining.innerHTML += `<div class="mission-text">MISSION: ${creatorLevels[currentLevel].m}</div>`;
+            } else {
+                DOM.uiLevel.innerText = `STUDIO READY`;
+                DOM.outTraining.innerHTML += `<div class="mission-text" style="color:var(--color-success)">ALL LEVELS CLEARED. You are officially a Terminal Creator.</div>`;
+            }
         }
 
-        window.onload = () => navigate('training');
+        async function bootSequence(mode) {
+            updatePrompt();
+            let text = [];
+            if (mode === 'training') text = ["Initializing Creator Studio...", "Loading curriculum...", "Ready."];
+            else if (mode === 'daily') text = ["Fetching today's challenge...", "Ready."];
+            else text = ["Sandbox environment active.", "All tools unlocked. Redirect (>) active.", "Ready."];
 
-        function executeCommand(rawCmd) {
+            for (let line of text) {
+                if (currentMode !== mode) return;
+                let id = `line-${Math.random().toString(36).substr(2, 5)}`;
+                printLog(`<div class="sys-text" id="${id}"></div>`);
+                for (let char of line) {
+                    if (currentMode !== mode) return;
+                    document.getElementById(id).innerHTML += char;
+                    await sleep(2);
+                }
+                await sleep(40);
+            }
+            if (currentMode === mode) printMission(mode);
+        }
+
+        // --- 7. ASYNC ANIMATION FUNCTIONS ---
+        async function runPackageManagerAnim(type, arg, runMode) {
+            DOM.input.disabled = true;
+            let id = `anim-${Date.now()}`;
+            printLog(`<div class="sys-text" id="${id}"></div>`);
+            let box = document.getElementById(id);
+            const chk = () => currentMode === runMode;
+
+            if (type === 'apt' && arg === 'update') {
+                if (chk()) box.innerHTML += "Hit:1 http://archive.ubuntu.com/ubuntu jammy InRelease<br>"; await sleep(200);
+                if (chk()) box.innerHTML += "Get:2 http://archive.ubuntu.com/ubuntu jammy-updates InRelease [119 kB]<br>"; await sleep(300);
+                if (chk()) box.innerHTML += "Fetched 119 kB in 1s (119 kB/s)<br>Reading package lists... Done<br>Building dependency tree... Done<br>";
+            }
+            else if (type === 'apt' && arg.startsWith('install ')) {
+                let pkg = arg.split(' ')[1];
+                if (chk()) box.innerHTML += `Reading package lists... Done<br>Building dependency tree... Done<br>The following NEW packages will be installed:<br>&nbsp;&nbsp;${pkg}<br>`; await sleep(400);
+                if (chk()) box.innerHTML += `Unpacking ${pkg} (latest) ...<br>`; await sleep(400);
+                if (chk()) box.innerHTML += `Setting up ${pkg} (latest) ...<br>`;
+            }
+            else if (type === 'pacman' && arg === '-sy') {
+                if (chk()) box.innerHTML += ":: Synchronizing package databases...<br>"; await sleep(200);
+                if (chk()) box.innerHTML += "&nbsp;core is up to date<br>&nbsp;extra downloading... [##########] 100%<br>"; await sleep(400);
+                if (chk()) box.innerHTML += "&nbsp;community is up to date<br>";
+            }
+            else if (type === 'pacman' && arg.startsWith('-s ')) {
+                let pkg = arg.split(' ')[1];
+                if (chk()) box.innerHTML += `resolving dependencies...<br>looking for conflicting packages...<br><br>Packages (1) ${pkg}-latest<br><br>:: Processing package changes...<br>(1/1) installing ${pkg} `;
+                for (let i = 0; i < 15; i++) { if (chk()) box.innerHTML += '#'; await sleep(20); }
+                if (chk()) box.innerHTML += ` 100%<br>:: Running post-transaction hooks...<br>Done.<br>`;
+            } else {
+                if (chk()) box.innerHTML = `<span class="err-text">Invalid package command.</span>`;
+            }
+
+            if (chk()) {
+                DOM.input.disabled = false;
+                DOM.input.focus();
+                setTimeout(() => DOM.terminal.scrollTop = DOM.terminal.scrollHeight, 10);
+            }
+        }
+
+        // --- 8. COMMAND ENGINE ---
+        function executeCommandCore(rawCmd) {
             let parts = rawCmd.split(" ");
             let cmd = parts[0];
             let arg1 = parts[1];
             let arg2 = parts[2];
             let dir = getVfsDir();
 
+            if (cmd === 'sudo') { cmd = arg1; arg1 = arg2; arg2 = parts[3]; }
+
             switch (cmd) {
-                case 'pwd':
-                    return "/" + currentPath.join("/");
-
+                case 'pwd': return "/" + currentPath.join("/");
                 case 'ls':
-                    let contents = Object.keys(dir);
-                    if (contents.length === 0) return "";
-                    let htmlList = contents.map(k => typeof dir[k] === 'object'
-                        ? `<div class="ls-folder">${k}/</div>`
-                        : `<div class="ls-file">${k}</div>`).join('');
-                    return `<div class="ls-grid">${htmlList}</div>`;
-
+                    const keys = Object.keys(dir);
+                    if (!keys.length) return "";
+                    return `<div class="ls-grid">` + keys.map(k => {
+                        if (k.startsWith('.') && arg1 !== '-a') return '';
+                        if (typeof dir[k] === 'object') return `<div class="ls-folder">${k}/</div>`;
+                        return k.startsWith('.') ? `<div class="ls-hidden">${k}</div>` : `<div class="ls-file">${k}</div>`;
+                    }).join('') + `</div>`;
+                case 'grep':
+                    if (!arg1 || !arg2) return "grep: usage: grep [keyword] [filename]";
+                    if (dir[arg2] === undefined) return `grep: ${arg2}: No file found`;
+                    let matches = dir[arg2].split('\n').filter(l => l.toLowerCase().includes(arg1.toLowerCase()));
+                    return matches.length ? matches.map(m => m.replace(new RegExp(`(${arg1})`, 'gi'), '<span style="color:var(--color-warning); font-weight:bold;">$1</span>')).join('<br>') : "";
+                case 'wc':
+                    if (arg1 !== '-l' || !arg2) return "wc: usage: wc -l [filename]";
+                    if (dir[arg2] === undefined) return `wc: ${arg2}: No file found`;
+                    return `${dir[arg2].split('\n').length} ${arg2}`;
+                case 'ps':
+                    let psOut = `<div style="display:flex;"><div style="width:50px;font-weight:bold;">PID</div><div>CMD</div></div>`;
+                    psOut += runningProcesses.map(p => `<div style="display:flex;"><div style="width:50px;color:var(--color-folder);">${p.pid}</div><div>${p.cmd}</div></div>`).join('');
+                    return psOut;
+                case 'kill':
+                    if (!arg1) return "kill: usage: kill [PID]";
+                    let targetPid = parseInt(arg1);
+                    let initialLength = runningProcesses.length;
+                    runningProcesses = runningProcesses.filter(p => p.pid !== targetPid);
+                    return runningProcesses.length < initialLength ? `Process ${targetPid} terminated.` : `kill: (${arg1}) - No such process`;
+                case 'curl':
+                    if (arg1 === 'youtube.local/api') return `{\n  "channel": "Terminal Training",\n  "subscribers": 1050000,\n  "views": 45000000\n}`;
+                    if (arg1 === 'shop.local/parts') return `{\n  "store": "MY E-Commerce",\n  "results": [\n    { "id": 1, "item": "27mm stopcock", "stock": "In Stock", "price": "RM 15.00" }\n  ]\n}`;
+                    return `curl: (6) Could not resolve host: ${arg1}`;
+                case 'ping': return `PING ${arg1} (56 bytes of data).<br>64 bytes from ${arg1}: icmp_seq=1 time=14.2 ms<br>64 bytes from ${arg1}: icmp_seq=2 time=12.5 ms`;
+                case 'date': return new Date().toString();
+                case 'uname': return "Linux studio 6.1.0-11-amd64 #1 SMP PREEMPT_DYNAMIC Debian 12.1.0-1 x86_64 GNU/Linux";
+                case 'df': return "Filesystem      Size  Used Avail Use% Mounted on<br>/dev/nvme0n1p2  1.8T  1.2T  500G  71% /";
+                case 'free': return "               total        used        free      shared  buff/cache   available<br>Mem:           32000       14200        5000         200       12800       16000";
+                case 'echo':
+                    let text = parts.slice(1).join(' ').replace(/['"]/g, '');
+                    return text ? text : "";
                 case 'mkdir':
                     if (!arg1) return "mkdir: missing operand";
-                    if (dir[arg1]) return `mkdir: cannot create directory '${arg1}': File exists`;
-                    dir[arg1] = {};
-                    return "";
-
+                    dir[arg1] = {}; return "";
+                case 'history':
+                    return cmdHistory.map((c, i) => `${i + 1}  ${c}`).join('<br>');
                 case 'touch':
-                    if (!arg1) return "touch: missing file operand";
-                    if (!dir[arg1]) dir[arg1] = "";
-                    return "";
-
-                case 'mv':
-                    if (!arg1 || !arg2) return `mv: missing operand`;
-                    if (dir[arg1] === undefined) return `mv: cannot stat '${arg1}': No file found`;
-                    dir[arg2] = dir[arg1];
-                    delete dir[arg1];
-                    return "";
-
-                case 'cp':
-                    if (!arg1 || !arg2) return `cp: missing operand`;
-                    if (dir[arg1] === undefined) return `cp: cannot stat '${arg1}': No file found`;
-                    dir[arg2] = JSON.parse(JSON.stringify(dir[arg1]));
-                    return "";
-
+                    if (!arg1) return "touch: missing operand";
+                    if (!dir[arg1]) dir[arg1] = ""; return "";
                 case 'rm':
-                    let target = arg1;
-                    let recursive = false;
-                    if (arg1 === '-r' || arg1 === '-rf') { recursive = true; target = arg2; }
+                    let target = (arg1 === '-r' || arg1 === '-rf') ? arg2 : arg1;
                     if (!target) return `rm: missing operand`;
                     if (dir[target] === undefined) return `rm: cannot remove '${target}': No file found`;
-                    if (typeof dir[target] === 'object' && !recursive) return `rm: cannot remove '${target}': Is a directory`;
-                    delete dir[target];
-                    return "";
-
-                case 'rmdir':
-                    if (!arg1) return `rmdir: missing operand`;
-                    if (dir[arg1] !== undefined && typeof dir[arg1] === 'object') {
-                        if (Object.keys(dir[arg1]).length > 0) return `rmdir: failed '${arg1}': Directory not empty`;
-                        delete dir[arg1]; return "";
-                    }
-                    return `rmdir: failed '${arg1}': No such directory`;
-
+                    delete dir[target]; return "";
                 case 'cd':
-                    if (!arg1 || arg1 === '~') { currentPath = ["home", "guest"]; return ""; }
-                    if (arg1 === '/') { currentPath = []; return ""; }
+                    if (!arg1 || arg1 === '~') { currentPath = ["home", "creator"]; return ""; }
                     if (arg1 === '..') { if (currentPath.length > 0) currentPath.pop(); return ""; }
                     if (dir[arg1] && typeof dir[arg1] === 'object') { currentPath.push(arg1); return ""; }
-                    return `cd: ${arg1}: No such directory`;
-
+                    return `cd: ${arg1}: No directory`;
                 case 'cat':
                     if (!arg1) return "cat: missing operand";
-                    if (dir[arg1] !== undefined && typeof dir[arg1] === 'string') return dir[arg1].replace(/\n/g, "<br>");
-                    return `cat: ${arg1}: No such file`;
-
+                    return typeof dir[arg1] === 'string' ? dir[arg1].replace(/\n/g, "<br>") : `cat: ${arg1}: No file`;
                 case 'clear':
-                    outputDiv.innerHTML = ''; return 'CLEAR_SIGNAL';
-
-                case 'whoami': return "guest";
-                case 'history': return cmdHistory.map((c, i) => `${i + 1}  ${c}`).join('<br>');
-                case 'ping': return `PING ${arg1 || '8.8.8.8'} (56 bytes of data).<br>64 bytes from ${arg1 || '8.8.8.8'}: icmp_seq=1 time=14.2 ms<br>64 bytes from ${arg1 || '8.8.8.8'}: icmp_seq=2 time=12.5 ms`;
-
-                default: return `<span class="error-text">Command not found: ${cmd}</span>`;
+                    currentOut.innerHTML = ''; return 'CLEAR_SIGNAL';
+                default: return `<span class="err-text">Command not found: ${cmd}</span>`;
             }
         }
 
-        const inputField = document.getElementById('cmd-input');
-        inputField.addEventListener('keydown', function (event) {
-            if (event.key === 'Enter') {
-                const rawCmd = inputField.value.trim().replace(/\s+/g, ' ').toLowerCase();
+        async function handleCommand(rawCmd) {
+            let activeMode = currentMode;
+            printLog(`<div><span class="prompt">${DOM.prompt.innerText}</span> ${rawCmd}</div>`);
 
-                if (rawCmd !== '') {
-                    cmdHistory.push(rawCmd);
-                    historyIndex = cmdHistory.length;
-
-                    outputDiv.innerHTML += `<div><span class="prompt">${getPromptString()}</span> ${rawCmd}</div>`;
-                    const response = executeCommand(rawCmd);
-
-                    if (response !== 'CLEAR_SIGNAL' && response !== '') {
-                        outputDiv.innerHTML += `<div>${response}</div>`;
-                    }
-                    promptUI.innerText = getPromptString();
-
-                    // LEVEL CHECKER
-                    if (currentMode === 'training' && currentLevel < levels.length) {
-                        if (levels[currentLevel].c(rawCmd)) {
-                            outputDiv.innerHTML += `<div class="success-text">✓ ${levels[currentLevel].s}</div>`;
-                            currentLevel++;
-
-                            inputField.disabled = true;
-
-                            setTimeout(() => {
-                                outputDiv.innerHTML = '';
-                                printMission();
-                                inputField.disabled = false;
-                                inputField.focus();
-                            }, 1500);
-                        }
-                    }
-                }
-
-                inputField.value = '';
-                const terminalWindow = document.getElementById('terminal-window');
-                setTimeout(() => terminalWindow.scrollTop = terminalWindow.scrollHeight, 50);
+            let checkCmd = rawCmd.replace('sudo ', '');
+            if (checkCmd.startsWith('apt ') || checkCmd.startsWith('pacman ')) {
+                let type = checkCmd.startsWith('apt') ? 'apt' : 'pacman';
+                let arg = checkCmd.substring(type.length + 1).trim();
+                await runPackageManagerAnim(type, arg, activeMode);
+                checkLevelProgression(rawCmd, activeMode);
+                return;
             }
 
-            else if (event.key === 'ArrowUp') {
-                event.preventDefault();
-                if (historyIndex > 0) { historyIndex--; inputField.value = cmdHistory[historyIndex]; }
-            } else if (event.key === 'ArrowDown') {
-                event.preventDefault();
-                if (historyIndex < cmdHistory.length - 1) { historyIndex++; inputField.value = cmdHistory[historyIndex]; }
-                else { historyIndex = cmdHistory.length; inputField.value = ''; }
+            let isRedirect = rawCmd.includes(' > ');
+            let baseCmd = isRedirect ? rawCmd.split(' > ')[0].trim() : rawCmd;
+            let redirectTarget = isRedirect ? rawCmd.split(' > ')[1].trim() : null;
+            let response = executeCommandCore(baseCmd);
+
+            if (isRedirect && redirectTarget && response !== 'CLEAR_SIGNAL' && !response.includes('err-text')) {
+                getVfsDir()[redirectTarget] = stripHtml(response);
+            } else if (response && response !== 'CLEAR_SIGNAL') {
+                printLog(`<div>${response}</div>`);
             }
-        });
 
-        document.addEventListener('keydown', function (event) {
-            if (event.ctrlKey && event.key === 'l') {
-                event.preventDefault();
-                outputDiv.innerHTML = `<div class="system-text">Screen cleared.</div>`;
+            updatePrompt();
+            checkLevelProgression(rawCmd, activeMode);
+        }
 
-                if (currentMode === 'training' && currentLevel < levels.length && levels[currentLevel].c('clear')) {
-                    outputDiv.innerHTML += `<div class="success-text">✓ ${levels[currentLevel].s}</div>`;
-                    currentLevel++;
+        function checkLevelProgression(rawCmd, runMode) {
+            if (runMode === 'training' && currentLevel < creatorLevels.length && creatorLevels[currentLevel].c(rawCmd)) {
+                let outDiv = DOM.outTraining;
+                outDiv.innerHTML += `<div class="success-text">[OK] ${creatorLevels[currentLevel].s}</div>`;
+                currentLevel++;
+                DOM.input.disabled = true;
 
-                    inputField.disabled = true;
+                // --- DELAY CHANGED TO 2.5 SECONDS (2500ms) ---
+                setTimeout(() => {
+                    outDiv.innerHTML = '';
+                    let nxt = currentLevel < creatorLevels.length
+                        ? `<div class="mission-text">MISSION: ${creatorLevels[currentLevel].m}</div>`
+                        : `<div class="mission-text" style="color:var(--color-success)">ALL LEVELS CLEARED. You are officially a Terminal Creator.</div>`;
+                    outDiv.innerHTML += nxt;
+
+                    if (currentMode === runMode) {
+                        DOM.input.disabled = false;
+                        DOM.input.focus();
+                        DOM.uiLevel.innerText = currentLevel < creatorLevels.length ? `Level ${currentLevel + 1} / 30` : `STUDIO READY`;
+                    } else {
+                        states.training.level = currentLevel;
+                    }
+                }, 2500);
+            }
+            else if (runMode === 'daily') {
+                const dayIndex = Math.floor((new Date() - new Date(new Date().getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24) % dailyTasks.length;
+                if (dailyTasks[dayIndex].c(rawCmd)) {
+                    let outDiv = DOM.outDaily;
+                    outDiv.innerHTML += `<div class="success-text">[SUCCESS] ${dailyTasks[dayIndex].s}</div>`;
+                    localStorage.setItem('daily_done', new Date().toDateString());
+                    DOM.input.disabled = true;
+
+                    // --- DELAY CHANGED TO 2.5 SECONDS (2500ms) ---
                     setTimeout(() => {
-                        outputDiv.innerHTML = '';
-                        printMission();
-                        inputField.disabled = false;
-                        inputField.focus();
-                    }, 1500);
+                        outDiv.innerHTML = '';
+                        outDiv.innerHTML += `<div class="mission-text" style="color:var(--color-success)">You completed today's quiz! Come back tomorrow. [COMPLETED]</div>`;
+                        if (currentMode === runMode) DOM.uiLevel.innerText = `[COMPLETED]`;
+                    }, 2500);
                 }
             }
+        }
+
+        // --- 9. INPUT LISTENERS ---
+        DOM.input.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                const rawCmd = DOM.input.value.trim().replace(/\s+/g, ' ').toLowerCase();
+                if (rawCmd) {
+                    cmdHistory.push(rawCmd);
+                    historyIdx = cmdHistory.length;
+                    handleCommand(rawCmd);
+                }
+                DOM.input.value = '';
+                setTimeout(() => DOM.terminal.scrollTop = DOM.terminal.scrollHeight, 10);
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                if (historyIdx > 0) DOM.input.value = cmdHistory[--historyIdx];
+            } else if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                if (historyIdx < cmdHistory.length - 1) DOM.input.value = cmdHistory[++historyIdx];
+                else { historyIdx = cmdHistory.length; DOM.input.value = ''; }
+            }
         });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.key === 'l') { e.preventDefault(); handleCommand('clear'); }
+        });
+
+        // INIT
+        window.onload = () => navigate('training');
     </script>
 </body>
 
